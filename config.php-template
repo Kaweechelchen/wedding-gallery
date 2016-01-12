@@ -6,4 +6,7 @@ class Config
     const DB_HOST = 'localhost';
     const DB_USER = 'root';
     const DB_PASS = 'root';
+
+    const ADMIN_USER = 'root';
+    const ADMIN_PASS = 'root';
 }

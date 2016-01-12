@@ -1,7 +1,7 @@
 <?php
 
-// load config
-require_once __DIR__.'/../config.php';
+require_once __DIR__.'/../init.php';
+login();
 
 // all images
 $images = glob(__DIR__.'/../photos/*.jpg');
@@ -13,18 +13,18 @@ if ($number < 0 || $number >= count($images))
 $imageName = basename($images[$number]);
 
 // connect to the database
-$pdo = new PDO('mysql:dbname='.Config::DB_NAME.';host='.Config::DB_HOST, Config::DB_USER, Config::DB_PASS);
+$db = getDb();
 
 if (isset($_POST['persons'])) {
     // delete old entries
-    $query = $pdo->prepare('DELETE FROM photo2person WHERE photo = :photo');
+    $query = $db->prepare('DELETE FROM photo2person WHERE photo = :photo');
     $query->execute(array(
         'photo' => $imageName
     ));
 
     // insert new persons
     $persons = array_filter(explode(',', $_POST['persons']));
-    $query = $pdo->prepare('INSERT INTO photo2person (photo, person) VALUES (:photo, :person)');
+    $query = $db->prepare('INSERT INTO photo2person (photo, person) VALUES (:photo, :person)');
     foreach ($persons as $person) {
         $query->execute(array(
             'photo' => $imageName,
@@ -34,14 +34,14 @@ if (isset($_POST['persons'])) {
 }
 
 // load persons
-$query = $pdo->prepare('SELECT person FROM photo2person WHERE photo = :photo ORDER BY person ASC');
+$query = $db->prepare('SELECT person FROM photo2person WHERE photo = :photo ORDER BY person ASC');
 $query->execute(array(
     'photo' => $imageName
 ));
 $persons = array_map(function($person) { return $person['person']; }, $query->fetchAll());
 
 // load all persons
-$query = $pdo->prepare('SELECT DISTINCT person FROM photo2person ORDER BY person ASC');
+$query = $db->prepare('SELECT DISTINCT person FROM photo2person ORDER BY person ASC');
 $query->execute();
 $allPersons = $query->fetchAll();
 

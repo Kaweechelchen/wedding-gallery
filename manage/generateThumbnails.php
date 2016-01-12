@@ -1,5 +1,8 @@
 <?php
 
+require_once __DIR__.'/../init.php';
+login();
+
 // sizes to create
 $sizes = array(
     'large' => 1280,
