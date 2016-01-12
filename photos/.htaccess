@@ -1,1 +1,2 @@
-deny from all
+RewriteEngine On
+RewriteRule .* photo.php [L]

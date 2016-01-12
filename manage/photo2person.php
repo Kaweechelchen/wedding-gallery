@@ -45,9 +45,6 @@ $query = $db->prepare('SELECT DISTINCT person FROM photo2person ORDER BY person 
 $query->execute();
 $allPersons = $query->fetchAll();
 
-// get preview image
-$image = __DIR__.'/../photos/large/'.$imageName;
-
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +54,7 @@ $image = __DIR__.'/../photos/large/'.$imageName;
 	<script src="../js/selectize.js"></script>
 </head>
 <body>
-    <img style="max-width: 100%;" src="data:image/jpg;base64,<?php echo base64_encode(file_get_contents($image)); ?>" />
+    <img style="max-width: 100%;" src="../photos/large/<?php echo $imageName; ?>" />
     <form method="POST">
         <input type="text" id="persons" name="persons" /><br />
         <button type="submit">Save</button>

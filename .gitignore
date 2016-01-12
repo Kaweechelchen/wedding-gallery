@@ -3,3 +3,4 @@ vendor
 composer.lock
 /photos/*
 !/photos/.htaccess
+!/photos/photo.php
