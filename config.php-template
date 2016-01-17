@@ -11,4 +11,5 @@ class Config
     const ADMIN_PASS = 'root';
 
     const HOST = 'http://localhost';
+    const BASE_URI = '/';
 }
