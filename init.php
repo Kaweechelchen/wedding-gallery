@@ -24,3 +24,46 @@ function login()
 
     $_SESSION['login'] = true;
 }
+
+function getPersons()
+{
+    $db = getDb();
+    $query = $db->prepare('SELECT DISTINCT person FROM photo2person ORDER BY person ASC');
+    $query->execute();
+    return $query->fetchAll();
+}
+
+function generateQRCode($hash)
+{
+    $link = Config::HOST.'/hash/'.$hash;
+
+    $imageBlob = (new Endroid\QrCode\QrCode())
+        ->setText($link)
+        ->setPadding(7)
+        ->setErrorCorrection('high')
+        ->get();
+
+    $qrcode = new Imagick();
+    $qrcode->readImageBlob($imageBlob);
+    $qrcode->scaleImage(600, 600, true);
+
+    $camera = new Imagick(__DIR__.'/camera.png');
+
+    $qrcodeSize = $qrcode->getImageGeometry();
+    $cameraSize = $camera->getImageGeometry();
+
+    $qrcode->compositeImage($camera, Imagick::COMPOSITE_DEFAULT,
+        round(($qrcodeSize['width'] - $cameraSize['width']) / 2),
+        round(($qrcodeSize['height'] - $cameraSize['height']) / 2));
+
+    $qrcode->setImageFormat('png');
+    header('Content-Type: image/png');
+    echo $qrcode->getImageBlob();
+
+    $qrcode->clear();
+    $qrcode->destroy();
+
+    $camera->clear();
+    $camera->destroy();
+    exit;
+}

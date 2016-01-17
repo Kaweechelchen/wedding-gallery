@@ -41,9 +41,7 @@ $query->execute(array(
 $persons = array_map(function($person) { return $person['person']; }, $query->fetchAll());
 
 // load all persons
-$query = $db->prepare('SELECT DISTINCT person FROM photo2person ORDER BY person ASC');
-$query->execute();
-$allPersons = $query->fetchAll();
+$allPersons = getPersons();
 
 ?><!DOCTYPE html>
 <html>
