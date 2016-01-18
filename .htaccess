@@ -1,1 +1,3 @@
-
+RewriteEngine On
+RewriteRule ^gallery/(.*)$ gallery.php?hash=$1 [L]
+RewriteRule ^download/(.*)$ download.php?hash=$1 [L]

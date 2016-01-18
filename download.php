@@ -54,7 +54,7 @@
     <?php
     foreach ($photos as $photo)
     {
-        echo '<a href="photos/'.$photo['photo'].'" download="'.$photo['photo'].'"><img src="photos/thumb/'.$photo['photo'].'" /></a>';
+        echo '<a href="'.Config::BASE_URI.'photos/'.$photo['photo'].'" download="'.$photo['photo'].'"><img src="'.Config::BASE_URI.'photos/thumb/'.$photo['photo'].'" /></a>';
     }
     ?>
 </body>

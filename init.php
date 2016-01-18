@@ -35,7 +35,7 @@ function getPersons()
 
 function generateQRCode($hash)
 {
-    $link = Config::HOST.Config::BASE_URI.'gallery.php?hash='.$hash;
+    $link = Config::HOST.Config::BASE_URI.'gallery/'.$hash;
 
     $imageBlob = (new Endroid\QrCode\QrCode())
         ->setText($link)

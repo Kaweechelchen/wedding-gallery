@@ -20,7 +20,7 @@
     {
         $_SESSION['photos'][] = $photo['photo'];
         $slideImages[] = array(
-            'src' => 'photos/large/'.$photo['photo']
+            'src' => Config::BASE_URI.'photos/large/'.$photo['photo']
         );
     }
 ?><!DOCTYPE html>
@@ -28,9 +28,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" href="css/vegas.css">
-    <script src="js/jquery.js"></script>
-	<script src="js/vegas.js"></script>
+    <link rel="stylesheet" href="<?php echo Config::BASE_URI; ?>css/vegas.css">
+    <script src="<?php echo Config::BASE_URI; ?>js/jquery.js"></script>
+	<script src="<?php echo Config::BASE_URI; ?>js/vegas.js"></script>
     <style>
         .button {
         	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -92,7 +92,7 @@
     </script>
     <div class="buttonContainer">
         <a href="mailto:?body=<?php echo urlencode(Config::HOST.$_SERVER['REQUEST_URI']); ?>" class="button">Mail</a>
-        <a href="download.php?hash=<?php echo $_GET['hash'] ?>" class="button">Download</a>
+        <a href="<?php echo Config::BASE_URI; ?>download/<?php echo $_GET['hash'] ?>" class="button">Download</a>
     </div>
 </body>
 </html>
