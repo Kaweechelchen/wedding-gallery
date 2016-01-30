@@ -1,6 +1,7 @@
 .box {
     border: 1px solid #EEE;
     float: left;
+    width: 6.4cm
 }
 
 .box img {
@@ -11,4 +12,5 @@
 .box .persons {
     border: 1px solid #F3F3F3;
     border-width: 1px 0 0 0;
+    height: 2cm;
 }
