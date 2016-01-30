@@ -21,7 +21,8 @@ if (!empty($_POST['persons'])) {
         ));
     }
 
-    generateQRCode($hash);
+    header('Location: '.Config::HOST.Config::BASE_URI.'manage/generateQRCode.php?hash='.$hash);
+    exit;
 }
 
 if (!empty($_GET['delete'])) {
